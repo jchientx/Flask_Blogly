@@ -1,0 +1,43 @@
+{%extends 'base.html'%}{% block title %}Create Post{%endblock%}{%block content%}
+
+<div>
+  <h1>Create Post for {{ user.full_name }}</h1>
+</div>
+
+<form method="POST">
+  <div>
+    <label for="title">Title</label>
+    <div>
+      <input id="title" name="title" />
+    </div>
+  </div>
+
+  <div>
+    <label for="content">Content</label>
+    <div>
+      <textarea name="content" id="content" cols="20" rows="10"></textarea>
+    </div>
+  </div>
+
+  <div>
+    {% for tag in tags %}
+    <input
+      type="checkbox"
+      value="{{ tag.id }}"
+      name="tags"
+      id="tag_{{ tag.id }}"
+    />
+    <label for="tag_{{ tag.id }}">{{ tag.name }}</label>
+    {% endfor %}
+  </div>
+
+  <div>
+    <button type="submit">Create</button>
+    <!-- error: user_id: Null -->
+    <!-- <button formaction="/users/{{user.id}}">Cancel</button> -->
+    <!-- ^^error: The method is not allowed for the requested URL. -->
+    <button><a href="/users/{{user.id}}">Cancel</a></button>
+  </div>
+</form>
+
+{% endblock %}
