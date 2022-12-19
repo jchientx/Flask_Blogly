@@ -1,0 +1,34 @@
+{% extends 'base.html' %}{% block title %}{{user.full_name}} {% endblock%}
+{%block content %}
+<div>
+  <img src="{{user.image_url}}" alt="{{user.full_name}}" />
+</div>
+
+<div>
+  <h1>{{user.full_name}}</h1>
+  <form>
+    <button formaction="/users/{{user.id}}/edit" formmethod="GET">Edit</button>
+    <button formaction="/users/{{user.id}}/delete" formmethod="POST">
+      Delete
+    </button>
+  </form>
+
+  <h2>Posts</h2>
+  <ul>
+    {% for post in user.posts %}
+    <li>
+      <a href="/posts/{{post.id}}">{{post.title}}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  <button><a href="/users/{{user.id}}/posts/new">Create Post</a></button>
+
+  <!-- Why this way not worked? Because not in the <form></form>-->
+  <!-- <button formaction="/users/{{user.id}}/posts/new" formmethod="POST">
+    Create Post
+  </button> -->
+
+  <!-- <p><a href="/users/{{user.id}}/posts/new">Create Post</a></p> -->
+</div>
+
+{% endblock %}
